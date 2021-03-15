@@ -1,0 +1,13 @@
+query Posts($options: PageQueryOptions) {
+    posts(options: $options) {
+        data {
+            id
+            title
+            body
+            user {
+                name
+                username
+            }
+        }
+    }
+}
