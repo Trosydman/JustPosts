@@ -1,16 +1,52 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.JustPosts" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+
+    <style name="Theme.JustPosts.DayNight" parent="Theme.JustPosts" />
+
+    <style name="Theme.JustPosts" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!--Color-->
+        <item name="colorPrimary">@color/justposts_blue_700</item>
+        <item name="colorPrimaryVariant">@color/justposts_blue_800</item>
+        <item name="colorSecondary">@color/justposts_orange_500</item>
+        <item name="colorSecondaryVariant">@color/justposts_orange_400</item>
+
+        <item name="android:colorBackground">@color/justposts_blue_50</item>
+        <item name="colorSurface">@color/justposts_white_50</item>
+        <item name="colorError">@color/justposts_red_400</item>
+
+        <item name="colorOnPrimary">@color/justposts_white_50</item>
+        <item name="colorOnSecondary">@color/justposts_black_900</item>
+        <item name="colorOnBackground">@color/justposts_black_900</item>
+        <item name="colorOnSurface">@color/justposts_black_900</item>
+        <item name="colorOnError">@color/justposts_black_900</item>
+
+        <item name="scrimBackground">@color/justposts_white_50_alpha_060</item>
+        <item name="android:statusBarColor">@color/justposts_blue_50_alpha_060</item>
+
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.JustPosts.SmallComponent
+        </item>
+        <item name="shapeAppearanceMediumComponent">
+            @style/ShapeAppearance.JustPosts.MediumComponent
+        </item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.JustPosts.LargeComponent
+        </item>
+
+        <!--Typography-->
+        <item name="textAppearanceHeadline2">@style/TextAppearance.JustPosts.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.JustPosts.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.JustPosts.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.JustPosts.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.JustPosts.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.JustPosts.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.JustPosts.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.JustPosts.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.JustPosts.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.JustPosts.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.JustPosts.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.JustPosts.Overline</item>
+
+        <!--System/Platform attributes-->
+        <item name="android:windowBackground">?android:colorBackground</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
     </style>
 </resources>
