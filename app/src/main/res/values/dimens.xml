@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Dimentions-->
+
+    <dimen name="justposts_small_component_corner_radius">24dp</dimen>
+    <dimen name="justposts_medium_component_corner_radius">0dp</dimen>
+    <dimen name="justposts_large_component_corner_radius">12dp</dimen>
+</resources>

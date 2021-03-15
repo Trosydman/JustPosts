@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Shape-->
+
+    <style name="ShapeAppearance.JustPosts.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/justposts_small_component_corner_radius</item>
+    </style>
+
+    <style name="ShapeAppearance.JustPosts.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/justposts_medium_component_corner_radius</item>
+    </style>
+
+    <style name="ShapeAppearance.JustPosts.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/justposts_large_component_corner_radius</item>
+    </style>
+</resources>
