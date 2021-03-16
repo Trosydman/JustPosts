@@ -3,9 +3,8 @@ package com.cmesquita.technicaltest.justposts.data_source.remote.api.graphqlzero
 import com.cmesquita.technicaltest.justposts.PostsQuery
 import com.cmesquita.technicaltest.justposts.ui.model.Post
 import com.cmesquita.technicaltest.justposts.utils.DomainMapper
-import javax.inject.Inject
 
-class PostsResponseDTOMapper @Inject constructor(
+class PostsResponseDTOMapper(
     private val dataDTOMapper: Data1DTOMapper
 ) : DomainMapper<List<Post>?, PostsQuery.Posts> {
 
