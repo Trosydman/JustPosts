@@ -1,13 +1,17 @@
 query Posts($options: PageQueryOptions) {
     posts(options: $options) {
         data {
-            id
-            title
-            body
-            user {
-                name
-                username
-            }
+            ...Post
         }
+    }
+}
+
+fragment Post on Post {
+    id
+    title
+    body
+    user {
+        name
+        username
     }
 }
