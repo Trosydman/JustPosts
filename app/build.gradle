@@ -21,6 +21,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -37,6 +42,9 @@ android {
 }
 
 dependencies {
+
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // Timber - Improved Logger
     implementation 'com.jakewharton.timber:timber:4.7.1'
