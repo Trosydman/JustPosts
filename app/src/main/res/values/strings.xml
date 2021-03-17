@@ -3,4 +3,7 @@
 
     <string name="message_no_post_title">No title</string>
     <string name="message_no_post_body">Nothing to say…</string>
+    <string name="message_error_loadstate">Something unexpected happened!</string>
+
+    <string name="action_retry">Retry</string>
 </resources>
