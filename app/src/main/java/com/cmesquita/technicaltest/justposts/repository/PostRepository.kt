@@ -13,7 +13,7 @@ class PostRepository(
     private val postsResponseDTOMapper: PostsResponseDTOMapper,
     private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
 ) {
-    suspend fun getPosts() =
+    fun getPosts() =
         Pager(
             config = PagingConfig(
                 pageSize = 20,
