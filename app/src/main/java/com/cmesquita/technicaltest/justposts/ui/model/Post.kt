@@ -5,11 +5,12 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Post(
-  private val id: Long?,
-  private val title: String?,
-  private val body: String?,
-  private val user: User
+  val id: Long?,
+  val title: String?,
+  val body: String?,
+  val user: User
 ) : Parcelable {
 
-  private fun hasBody() = body == null
+  fun hasTitle() = title != null
+  fun hasBody() = body != null
 }
