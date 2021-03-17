@@ -1,6 +1,7 @@
 package com.cmesquita.technicaltest.justposts.repository
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.apollographql.apollo.exception.ApolloException
 import com.cmesquita.technicaltest.justposts.data_source.remote.GraphQLZeroRemoteDataSource
 import com.cmesquita.technicaltest.justposts.data_source.remote.api.graphqlzero.mapper.PostsResponseDTOMapper
@@ -35,5 +36,9 @@ class PostPagingSource(
         } catch (exception: Exception) {
             LoadResult.Error(exception)
         }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, Post>): Int? {
+        return state.anchorPosition
     }
 }
