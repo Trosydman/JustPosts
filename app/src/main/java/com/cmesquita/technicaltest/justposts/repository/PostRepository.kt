@@ -4,6 +4,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.cmesquita.technicaltest.justposts.data_source.remote.GraphQLZeroRemoteDataSource
 import com.cmesquita.technicaltest.justposts.data_source.remote.api.graphqlzero.mapper.PostsResponseDTOMapper
+import com.cmesquita.technicaltest.justposts.ui.posts.PostsViewModel.Companion.DEFAULT_MAX_SIZE
+import com.cmesquita.technicaltest.justposts.ui.posts.PostsViewModel.Companion.DEFAULT_PAGE_SIZE
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
@@ -13,11 +15,12 @@ class PostRepository(
     private val postsResponseDTOMapper: PostsResponseDTOMapper,
     private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
 ) {
-    suspend fun getPosts() =
+    fun getPosts() =
         Pager(
             config = PagingConfig(
-                pageSize = 20,
-                maxSize = 100,
+                pageSize = DEFAULT_PAGE_SIZE,
+                initialLoadSize = DEFAULT_PAGE_SIZE,
+                maxSize = DEFAULT_MAX_SIZE,
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {

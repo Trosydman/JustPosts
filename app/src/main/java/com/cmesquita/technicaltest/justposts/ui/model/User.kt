@@ -5,9 +5,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class User(
-  private val name: String?,
-  private val userName: String?
+  val name: String?,
+  val userName: String?
 ) : Parcelable {
 
-  private fun isAnonymous() = name == null && userName == null
+  fun isAnonymous() = name == null && userName == null
 }

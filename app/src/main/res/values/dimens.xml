@@ -4,6 +4,17 @@
     <!--Dimentions-->
 
     <dimen name="justposts_small_component_corner_radius">24dp</dimen>
-    <dimen name="justposts_medium_component_corner_radius">0dp</dimen>
+    <dimen name="justposts_medium_component_corner_radius">8dp</dimen>
     <dimen name="justposts_large_component_corner_radius">12dp</dimen>
+
+    <dimen name="smallest">1dp</dimen>
+    <dimen name="small">2dp</dimen>
+    <dimen name="medium">4dp</dimen>
+    <dimen name="large">8dp</dimen>
+    <dimen name="x_large">16dp</dimen>
+    <dimen name="xx_large">24dp</dimen>
+    <dimen name="xxx_large">32dp</dimen>
+    <dimen name="xxxx_large">40dp</dimen>
+
+    <integer name="max_post_body_character">120</integer>
 </resources>
