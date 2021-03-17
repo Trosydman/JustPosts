@@ -15,6 +15,11 @@ class PostsViewModel @Inject constructor(
     postRepository: PostRepository
 ) : ViewModel() {
 
+    companion object {
+        const val DEFAULT_PAGE_SIZE = 20
+        const val DEFAULT_MAX_SIZE = 100
+    }
+
     val posts = postRepository.getPosts()
         .onEach { pagingData ->
             pagingData.filter { it.title != null && it.body != null }
