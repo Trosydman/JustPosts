@@ -6,17 +6,17 @@ import com.cmesquita.technicaltest.justposts.utils.DomainMapper
 
 class PostsResponseDTOMapper(
     private val dataDTOMapper: Data1DTOMapper
-) : DomainMapper<List<Post>?, PostsQuery.Posts> {
+) : DomainMapper<List<Post?>?, PostsQuery.Posts> {
 
-    override fun mapToDomainModel(dtoModel: PostsQuery.Posts): List<Post>? {
+    override fun mapToDomainModel(dtoModel: PostsQuery.Posts): List<Post?>? {
         return if (dtoModel.data != null) {
-            dataDTOMapper.mapToDomainModelList(dtoModel.data).filterNotNull()
+            dataDTOMapper.mapToDomainModelList(dtoModel.data)
         } else {
             null
         }
     }
 
-    override fun mapToDomainModelList(dtoModelList: List<PostsQuery.Posts>): List<List<Post>?> {
+    override fun mapToDomainModelList(dtoModelList: List<PostsQuery.Posts>): List<List<Post?>?> {
         return dtoModelList.map { mapToDomainModel(it) }
     }
 }

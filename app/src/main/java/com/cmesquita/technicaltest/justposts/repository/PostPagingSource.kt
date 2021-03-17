@@ -22,11 +22,11 @@ class PostPagingSource(
         return try {
             val postsResponseDTO = graphQLZeroRemoteDataSource.getPosts(position, params.loadSize)
                 .first()
-            val posts: List<Post> = postsResponseDTOMapper.mapToDomainModel(postsResponseDTO)
+            val posts = postsResponseDTOMapper.mapToDomainModel(postsResponseDTO)
                 ?: throw Exception("Posts are null")
 
             LoadResult.Page(
-                data = posts,
+                data = posts.filterNotNull(),
                 prevKey = if (position == FIRST_PAGE_INDEX) null else position - 1,
                 nextKey = if (posts.isEmpty()) null else position + 1
             )
