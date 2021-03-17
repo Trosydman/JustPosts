@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="post"
+            type="com.cmesquita.technicaltest.justposts.ui.model.Post" />
+
+        <variable
+            name="listener"
+            type="com.cmesquita.technicaltest.justposts.ui.posts.PostPagingAdapter.PostAdapterListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/medium"
+        android:onClick="@{(view) -> listener.onPostItemClicked(post)}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x_large">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/noteIcon"
+                android:layout_width="48dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_twotone_sticky_note"
+                tools:layout_editor_absoluteX="@dimen/x_large" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/postTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/x_large"
+                android:ellipsize="end"
+                android:enabled="@{post.hasTitle()}"
+                android:maxLines="1"
+                android:text="@{post.hasTitle() ? post.title : @string/message_no_post_title}"
+                android:textAppearance="?textAppearanceHeadline5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/noteIcon"
+                app:layout_constraintTop_toTopOf="@+id/noteIcon"
+                tools:text="Post Title" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/postBody"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large"
+                android:ellipsize="end"
+                android:enabled="@{post.hasBody()}"
+                android:maxLength="@integer/max_post_body_character"
+                android:text="@{post.hasBody() ? post.body : @string/message_no_post_body}"
+                android:textAppearance="?textAppearanceBody2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/postTitle"
+                app:layout_constraintTop_toBottomOf="@id/postTitle"
+                tools:text="123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
