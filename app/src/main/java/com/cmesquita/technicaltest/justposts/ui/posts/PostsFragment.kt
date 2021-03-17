@@ -10,7 +10,8 @@ import com.cmesquita.technicaltest.justposts.ui.model.Post
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostAdapterListener {
+class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostAdapterListener,
+    PostLoadStateAdapter.PostLoadStateListener {
 
     private val viewModel by viewModels<PostsViewModel>()
 
@@ -24,7 +25,10 @@ class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostA
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentPostsBinding.bind(view).apply {
             lifecycleOwner = viewLifecycleOwner
-            postsList.adapter = pagingAdapter
+            postsList.adapter = pagingAdapter.withLoadStateHeaderAndFooter(
+                header = PostLoadStateAdapter(this@PostsFragment),
+                footer = PostLoadStateAdapter(this@PostsFragment)
+            )
         }
 
         viewModel.posts.observe(viewLifecycleOwner) {
@@ -40,5 +44,9 @@ class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostA
 
     override fun onPostItemClicked(post: Post) {
         // TODO Navigate to details screen
+    }
+
+    override fun onRetryClicked() {
+        pagingAdapter.retry()
     }
 }
