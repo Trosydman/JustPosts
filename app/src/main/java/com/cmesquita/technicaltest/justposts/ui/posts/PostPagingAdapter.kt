@@ -1,6 +1,7 @@
 package com.cmesquita.technicaltest.justposts.ui.posts
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -12,7 +13,7 @@ class PostPagingAdapter(
 ) : PagingDataAdapter<Post, PostViewHolder>(POST_COMPARATOR) {
 
     interface PostAdapterListener {
-        fun onPostItemClicked(post: Post)
+        fun onPostItemClicked(view: View, post: Post)
     }
 
     companion object {

@@ -1,13 +1,101 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.post_details.PostDetailsFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="post"
+            type="com.cmesquita.technicaltest.justposts.ui.model.Post" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_margin="@dimen/large"
+        android:transitionName="@string/post_card_detail_transition_name"
+        tools:context=".ui.posts.PostsFragment">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/x_large"
+            android:paddingVertical="@dimen/xx_large">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/post_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small"
+                android:layout_marginEnd="@dimen/large"
+                android:text="@{post.title}"
+                android:textAppearance="?textAppearanceHeadline4"
+                android:textColor="?colorOnSurface"
+                app:layout_constraintEnd_toStartOf="@+id/navigation_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="The Title of the Post" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/navigation_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?actionBarItemBackground"
+                android:padding="@dimen/large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/post_title"
+                app:srcCompat="@drawable/ic_keyboard_arrow_down" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/post_author_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large"
+                android:enabled="@{!post.user.isAnonymous()}"
+                android:text="@{post.user.isAnonymous() ? @string/message_anonymous_author : post.user.name}"
+                android:textAppearance="?textAppearanceBody2"
+                android:visibility="@{post.user.name == null ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/post_title"
+                tools:text="Ali Connors" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/post_author_userName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small"
+                android:text="@{post.user.userName}"
+                android:textAppearance="?textAppearanceCaption"
+                android:visibility="@{post.user.isAnonymous() || post.user.userName == null ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/post_author_name"
+                app:layout_goneMarginTop="@dimen/large"
+                tools:text="\@aconnors" />
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/post_body_scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/xx_large"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/post_author_userName">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/post_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{post.body}"
+                    android:textAppearance="?textAppearanceBody1"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus consectetur tincidunt turpis vitae dapibus. Nulla eget urna venenatis, finibus est sed, facilisis mi. Ut rutrum libero nec dolor tincidunt tempor. In maximus turpis nec lectus varius facilisis. Vestibulum vitae felis at nunc facilisis tristique vel eget nisl. Aliquam nec lorem vel dui suscipit tempor quis eget orci. Fusce non ullamcorper lacus, eget elementum tortor. Nulla in suscipit urna. " />
+            </androidx.core.widget.NestedScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
