@@ -16,8 +16,8 @@ class PostsViewModel @Inject constructor(
 ) : ViewModel() {
 
     companion object {
-        const val DEFAULT_PAGE_SIZE = 20
-        const val DEFAULT_MAX_SIZE = 100
+        const val DEFAULT_PAGE_SIZE = 10
+        const val DEFAULT_MAX_SIZE = 40
     }
 
     val posts = postRepository.getPosts()
