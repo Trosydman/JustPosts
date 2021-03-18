@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_JustPosts_DayNight)
+        setTheme(R.style.Theme_JustPosts)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

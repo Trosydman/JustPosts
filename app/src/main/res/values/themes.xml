@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.JustPosts.DayNight" parent="Theme.JustPosts" />
+    <style name="Theme.JustPosts" parent="Base.Theme.JustPosts" />
 
-    <style name="Theme.JustPosts" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Base.Theme.JustPosts" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <!--Color-->
         <item name="colorPrimary">@color/justposts_blue_700</item>

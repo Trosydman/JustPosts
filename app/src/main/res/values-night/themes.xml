@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.JustPosts.DayNight" parent="Theme.JustPosts.Dark" />
+    <style name="Theme.JustPosts" parent="Base.Theme.JustPosts.Dark" />
 
-    <style name="Theme.JustPosts.Dark" parent="Theme.JustPosts">
+    <style name="Base.Theme.JustPosts.Dark" parent="Base.Theme.JustPosts">
 
         <!--Color-->
         <item name="colorPrimary">@color/justposts_blue_200</item>
