@@ -46,8 +46,6 @@ class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostA
             )
         }
 
-        setupLoadStateListener()
-
         connectViews()
 
         viewModel.connectionLiveData.observe(viewLifecycleOwner) { isNetworkAvailable ->
@@ -61,6 +59,8 @@ class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostA
         viewModel.posts.observe(viewLifecycleOwner) {
             pagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
+
+        setupLoadStateListener()
     }
 
     override fun onDestroyView() {
@@ -98,18 +98,23 @@ class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostA
             val isEmpty = refreshState is LoadState.NotLoading &&
                     loadState.append.endOfPaginationReached && pagingAdapter.itemCount < 1
             val errorState = when {
-                loadState.source.append is LoadState.Error -> loadState.source.append as LoadState.Error
-                loadState.source.prepend is LoadState.Error -> loadState.source.prepend as LoadState.Error
-                loadState.source.refresh is LoadState.Error -> loadState.source.refresh as LoadState.Error
+                loadState.source.append is LoadState.Error ->
+                    loadState.source.append as LoadState.Error
+
+                loadState.source.prepend is LoadState.Error ->
+                    loadState.source.prepend as LoadState.Error
+
+                loadState.source.refresh is LoadState.Error ->
+                    loadState.source.refresh as LoadState.Error
                 else -> null
             }
+
+            showError(errorState?.error)
 
             binding.apply {
                 loadingBar.isVisible = refreshState is LoadState.Loading
                 postsList.isVisible = refreshState is LoadState.NotLoading && !isEmpty
                 emptyListInfo.root.isVisible = isEmpty
-
-                showError(errorState?.error)
             }
         }
     }
@@ -117,7 +122,12 @@ class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostA
     private fun showError(error: Throwable?) {
         val isNetworkAvailable = viewModel.connectionLiveData.value ?: false
 
-        if (error != null && isNetworkAvailable) {
+        if (!isNetworkAvailable) {
+            binding.noConnectionBanner.isVisible = true
+            return
+        }
+
+        if (error != null) {
             MaterialAlertDialogBuilder(context ?: return)
                 .setTitle(R.string.title_unexpected_error)
                 .setMessage(getString(R.string.message_unexpected_error, error.localizedMessage))
