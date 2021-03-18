@@ -9,5 +9,21 @@
         android:id="@+id/postsFragment"
         android:name="com.cmesquita.technicaltest.justposts.ui.posts.PostsFragment"
         android:label="fragment_posts"
-        tools:layout="@layout/fragment_posts" />
+        tools:layout="@layout/fragment_posts">
+        
+        <action
+            android:id="@+id/to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/postDetailsFragment"
+        android:name="com.cmesquita.technicaltest.justposts.ui.post_details.PostDetailsFragment"
+        android:label="fragment_post_details"
+        tools:layout="@layout/fragment_post_details">
+
+        <argument
+            android:name="post"
+            app:argType="com.cmesquita.technicaltest.justposts.ui.model.Post" />
+    </fragment>
 </navigation>

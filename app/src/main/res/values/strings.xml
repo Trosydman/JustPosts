@@ -4,6 +4,11 @@
     <string name="message_no_post_title">No title</string>
     <string name="message_no_post_body">Nothing to say…</string>
     <string name="message_error_loadstate">Something unexpected happened!</string>
+    <string name="message_anonymous_author">Anonymous</string>
 
     <string name="action_retry">Retry</string>
+
+    <!-- Fragment transitions -->
+    <string name="post_card_transition_name">post_card_%1$s</string>
+    <string name="post_card_detail_transition_name">post_card_detail</string>
 </resources>
