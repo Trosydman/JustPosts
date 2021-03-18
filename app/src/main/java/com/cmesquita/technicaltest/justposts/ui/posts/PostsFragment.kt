@@ -2,6 +2,7 @@ package com.cmesquita.technicaltest.justposts.ui.posts
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -89,6 +90,10 @@ class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostA
             emptyListInfo.retryButton.setOnClickListener {
                 retryAdapter()
             }
+
+            fab.setOnClickListener {
+                toggleTheme()
+            }
         }
     }
 
@@ -136,6 +141,14 @@ class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostA
                 }
                 .setCancelable(false)
                 .show()
+        }
+    }
+
+    private fun toggleTheme() {
+        if (AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
 
