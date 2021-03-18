@@ -3,14 +3,17 @@ package com.cmesquita.technicaltest.justposts.ui.posts
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import com.cmesquita.technicaltest.justposts.R
 import com.cmesquita.technicaltest.justposts.databinding.FragmentPostsBinding
 import com.cmesquita.technicaltest.justposts.ui.model.Post
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.MaterialElevationScale
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +28,8 @@ class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostA
     private var _binding: FragmentPostsBinding? = null
 
     private val pagingAdapter = PostPagingAdapter(this)
+    private val headerLoadStateAdapter = PostLoadStateAdapter(this)
+    private val footerLoadStateAdapter = PostLoadStateAdapter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,13 +41,74 @@ class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostA
         _binding = FragmentPostsBinding.bind(view).apply {
             lifecycleOwner = viewLifecycleOwner
             postsList.adapter = pagingAdapter.withLoadStateHeaderAndFooter(
-                header = PostLoadStateAdapter(this@PostsFragment),
-                footer = PostLoadStateAdapter(this@PostsFragment)
+                header = headerLoadStateAdapter,
+                footer = footerLoadStateAdapter
             )
+        }
+
+        setupLoadStateListener()
+
+        connectViews()
+
+        viewModel.connectionLiveData.observe(viewLifecycleOwner) { isNetworkAvailable ->
+            if (isNetworkAvailable) {
+                retryAdapter()
+            }
+
+            binding.noConnectionBanner.isVisible = !isNetworkAvailable
         }
 
         viewModel.posts.observe(viewLifecycleOwner) {
             pagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+        }
+    }
+
+    private fun connectViews() {
+        with(binding) {
+            emptyListInfo.retryButton.setOnClickListener {
+                retryAdapter()
+            }
+        }
+    }
+
+    private fun retryAdapter() {
+        pagingAdapter.retry()
+    }
+
+    private fun setupLoadStateListener() {
+        pagingAdapter.addLoadStateListener { loadState ->
+            val refreshState = loadState.source.refresh
+            val isEmpty = refreshState is LoadState.NotLoading &&
+                    loadState.append.endOfPaginationReached && pagingAdapter.itemCount < 1
+            val errorState = when {
+                loadState.source.append is LoadState.Error -> loadState.source.append as LoadState.Error
+                loadState.source.prepend is LoadState.Error -> loadState.source.prepend as LoadState.Error
+                loadState.source.refresh is LoadState.Error -> loadState.source.refresh as LoadState.Error
+                else -> null
+            }
+
+            binding.apply {
+                loadingBar.isVisible = refreshState is LoadState.Loading
+                postsList.isVisible = refreshState is LoadState.NotLoading && !isEmpty
+                emptyListInfo.root.isVisible = isEmpty
+
+                showError(errorState?.error)
+            }
+        }
+    }
+
+    private fun showError(error: Throwable?) {
+        val isNetworkAvailable = viewModel.connectionLiveData.value ?: false
+
+        if (error != null && isNetworkAvailable) {
+            MaterialAlertDialogBuilder(context ?: return)
+                .setTitle(R.string.title_unexpected_error)
+                .setMessage(getString(R.string.message_unexpected_error, error.localizedMessage))
+                .setPositiveButton(R.string.action_retry) { _, _ ->
+                    retryAdapter()
+                }
+                .setCancelable(false)
+                .show()
         }
     }
 
@@ -73,6 +139,6 @@ class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostA
     }
 
     override fun onRetryClicked() {
-        pagingAdapter.retry()
+        retryAdapter()
     }
 }
