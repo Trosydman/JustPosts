@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">JustPosts</string>
 
+    <string name="title_unexpected_error">Ups!</string>
+
     <string name="message_no_post_title">No title</string>
     <string name="message_no_post_body">Nothing to say…</string>
     <string name="message_error_loadstate">Something unexpected happened!</string>
     <string name="message_anonymous_author">Anonymous</string>
+    <string name="message_no_internet_connection">No internet connection</string>
+    <string name="message_empty_posts_list">Sorry, no posts at the moment…</string>
+    <string name="message_unexpected_error">Unexpected error happened. Please check details below.\n\nMore details: %s</string>
 
     <string name="action_retry">Retry</string>
 
