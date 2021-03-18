@@ -63,16 +63,33 @@ class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostA
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        _binding = null
+    }
+
+    override fun onPostItemClicked(view: View, post: Post) {
+        val extras = setupNavigatorExtras(view)
+        val directions = PostsFragmentDirections.toPostDetailsFragment(post)
+
+        findNavController().navigate(directions, extras)
+    }
+
+    override fun onRetryClicked() {
+        retryAdapter()
+    }
+
+    private fun retryAdapter() {
+        pagingAdapter.retry()
+    }
+
     private fun connectViews() {
         with(binding) {
             emptyListInfo.retryButton.setOnClickListener {
                 retryAdapter()
             }
         }
-    }
-
-    private fun retryAdapter() {
-        pagingAdapter.retry()
     }
 
     private fun setupLoadStateListener() {
@@ -112,19 +129,6 @@ class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostA
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        _binding = null
-    }
-
-    override fun onPostItemClicked(view: View, post: Post) {
-        val extras = setupNavigatorExtras(view)
-        val directions = PostsFragmentDirections.toPostDetailsFragment(post)
-
-        findNavController().navigate(directions, extras)
-    }
-
     private fun setupNavigatorExtras(view: View): FragmentNavigator.Extras {
         exitTransition = MaterialElevationScale(false).apply {
             duration = resources.getInteger(R.integer.justposts_motion_duration_large).toLong()
@@ -136,9 +140,5 @@ class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostA
         val emailCardDetailTransitionName = getString(R.string.post_card_detail_transition_name)
 
         return FragmentNavigatorExtras(view to emailCardDetailTransitionName)
-    }
-
-    override fun onRetryClicked() {
-        retryAdapter()
     }
 }
