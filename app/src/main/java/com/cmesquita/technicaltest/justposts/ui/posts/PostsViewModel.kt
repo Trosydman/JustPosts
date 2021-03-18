@@ -6,13 +6,15 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.filter
 import com.cmesquita.technicaltest.justposts.repository.PostRepository
+import com.cmesquita.technicaltest.justposts.ui.utils.ConnectionLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
 class PostsViewModel @Inject constructor(
-    postRepository: PostRepository
+    postRepository: PostRepository,
+    val connectionLiveData: ConnectionLiveData
 ) : ViewModel() {
 
     companion object {
