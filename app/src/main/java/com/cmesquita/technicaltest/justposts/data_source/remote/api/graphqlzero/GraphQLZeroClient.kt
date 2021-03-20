@@ -12,13 +12,13 @@ import timber.log.Timber
 
 class GraphQLZeroClient(
     private val apolloClient: ApolloClient
-) {
+) : IGraphQLZeroClient {
 
     companion object {
         const val BASE_URL = "https://graphqlzero.almansi.me/api"
     }
 
-    suspend fun getPosts(page: Int, limit: Int): Posts {
+    override suspend fun getPosts(page: Int, limit: Int): Posts {
         val pageQueryOptions = PageQueryOptions(
             Input.optional(
                 PaginateOptions(
