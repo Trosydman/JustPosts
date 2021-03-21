@@ -11,7 +11,9 @@ class Data1DTOMapper : DomainMapper<Post?, PostsQuery.Data1?> {
 
         return dtoModel?.let {
             with(dtoModel.fragments.post) {
-                if (title != null && body != null) {
+                if (title.isNullOrBlank() && body.isNullOrBlank()) {
+                    null
+                } else {
                     Post(
                         id?.toLong(),
                         title,
@@ -21,8 +23,6 @@ class Data1DTOMapper : DomainMapper<Post?, PostsQuery.Data1?> {
                             user?.username
                         )
                     )
-                } else {
-                    null
                 }
             }
         } ?: run { null }
