@@ -50,7 +50,7 @@ In addition, based on [this GraphQL query](app/src/main/graphql/com/cmesquita/te
 ## Conclusion 
 
 ### Resources
-Find attach to the project folder a [debug APK](JustPosts_1.0(1)-debug.apk). Alternatively you can build the project using **Android Studio 4.1.2**.
+Find attach to the project folder a [debug APK](JustPosts_1.1(2)-debug.apk). Alternatively you can build the project using **Android Studio 4.1.2**.
 
 In addition, a few screenshots and a demo video can be found also in the project folder: 
 - [JustsPosts_DemoVideo.mp4](screenshots/JustsPosts_DemoVideo.mp4)
