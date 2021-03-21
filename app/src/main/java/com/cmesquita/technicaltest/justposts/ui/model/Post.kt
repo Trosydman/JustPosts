@@ -11,6 +11,6 @@ data class Post(
   val user: User
 ) : Parcelable {
 
-  fun hasTitle() = title != null
-  fun hasBody() = body != null
+  fun hasTitle() = !title.isNullOrBlank()
+  fun hasBody() = !body.isNullOrBlank()
 }

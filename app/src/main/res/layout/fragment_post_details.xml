@@ -32,7 +32,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small"
                 android:layout_marginEnd="@dimen/large"
-                android:text="@{post.title}"
+                android:enabled="@{post.hasTitle()}"
+                android:text="@{post.hasTitle() ? post.title : @string/message_no_post_title}"
                 android:textAppearance="?textAppearanceHeadline4"
                 android:textColor="?colorOnSurface"
                 app:layout_constraintEnd_toStartOf="@+id/navigation_icon"
@@ -58,7 +59,7 @@
                 android:enabled="@{!post.user.isAnonymous()}"
                 android:text="@{post.user.isAnonymous() ? @string/message_anonymous_author : post.user.name}"
                 android:textAppearance="?textAppearanceBody2"
-                android:visibility="@{post.user.name == null ? View.GONE : View.VISIBLE}"
+                android:visibility="@{!post.user.isAnonymous() &amp; post.user.name == null ? View.GONE : View.VISIBLE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/post_title"
@@ -92,7 +93,8 @@
                     android:id="@+id/post_body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{post.body}"
+                    android:enabled="@{post.hasBody()}"
+                    android:text="@{post.hasBody() ? post.body : @string/message_no_post_body}"
                     android:textAppearance="?textAppearanceBody1"
                     tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus consectetur tincidunt turpis vitae dapibus. Nulla eget urna venenatis, finibus est sed, facilisis mi. Ut rutrum libero nec dolor tincidunt tempor. In maximus turpis nec lectus varius facilisis. Vestibulum vitae felis at nunc facilisis tristique vel eget nisl. Aliquam nec lorem vel dui suscipit tempor quis eget orci. Fusce non ullamcorper lacus, eget elementum tortor. Nulla in suscipit urna. " />
             </androidx.core.widget.NestedScrollView>

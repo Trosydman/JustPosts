@@ -1,8 +1,7 @@
 package com.cmesquita.technicaltest.justposts.di
 
-import com.apollographql.apollo.ApolloClient
 import com.cmesquita.technicaltest.justposts.data_source.remote.GraphQLZeroRemoteDataSource
-import com.cmesquita.technicaltest.justposts.data_source.remote.api.graphqlzero.GraphQLZeroClient
+import com.cmesquita.technicaltest.justposts.data_source.remote.api.graphqlzero.IGraphQLZeroClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,18 +14,7 @@ object RemoteModule {
 
     @Singleton
     @Provides
-    fun provideApolloClient(): ApolloClient = ApolloClient.builder()
-        .serverUrl(GraphQLZeroClient.BASE_URL)
-        .build()
-
-    @Singleton
-    @Provides
-    fun provideGraphQLZeroClient(apolloClient: ApolloClient): GraphQLZeroClient =
-        GraphQLZeroClient(apolloClient)
-
-    @Singleton
-    @Provides
     fun provideGraphQLZeroRemoteDataSource(
-        graphQLZeroClient: GraphQLZeroClient
+        graphQLZeroClient: IGraphQLZeroClient
     ): GraphQLZeroRemoteDataSource = GraphQLZeroRemoteDataSource(graphQLZeroClient)
 }

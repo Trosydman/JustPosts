@@ -2,6 +2,8 @@ package com.cmesquita.technicaltest.justposts.ui.posts
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.VisibleForTesting
+import androidx.annotation.VisibleForTesting.PRIVATE
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
@@ -31,6 +33,9 @@ class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostA
     private val pagingAdapter = PostPagingAdapter(this)
     private val headerLoadStateAdapter = PostLoadStateAdapter(this)
     private val footerLoadStateAdapter = PostLoadStateAdapter(this)
+
+    @VisibleForTesting(otherwise = PRIVATE)
+    var enableTransitions = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,10 +76,13 @@ class PostsFragment : Fragment(R.layout.fragment_posts), PostPagingAdapter.PostA
     }
 
     override fun onPostItemClicked(view: View, post: Post) {
-        val extras = setupNavigatorExtras(view)
         val directions = PostsFragmentDirections.toPostDetailsFragment(post)
 
-        findNavController().navigate(directions, extras)
+        if (enableTransitions) {
+            findNavController().navigate(directions, setupNavigatorExtras(view))
+        } else {
+            findNavController().navigate(directions)
+        }
     }
 
     override fun onRetryClicked() {
