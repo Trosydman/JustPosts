@@ -1,13 +1,20 @@
 # JustPosts
+
 JustPost app displays a bunch of random posts from [GraphQLZero](https://graphqlzero.almansi.me/)
 
 <img src="screenshots/JustsPosts_DemoVideo.gif" width=50% height=50%>
 
 > GIF Source: [JustPosts_DemoVideo](screenshots/JustsPosts_DemoVideo.mp4)
-> 
+>
+
+## VERY IMPORTANT
+
+**This project has to run on a special preview: `Android Studio Arctic Fox | 2020.3.1 Canary 14`**
+
 ## Getting Started
 
 In the last week, I developed this nice app using the following tech stack:
+
 - 100% Kotlin
 - Architecture: MVVM, CLEAN, SOLID, Repository pattern...
 - Jetpack Architecture Components: ViewModel, LiveData, Navigation, Paging 3...
