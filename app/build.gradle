@@ -23,6 +23,8 @@ android {
     }
 
     buildFeatures {
+        compose true
+
         viewBinding true
         dataBinding true
     }
@@ -39,6 +41,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.0.0-beta01'
     }
 }
 
@@ -62,6 +68,22 @@ dependencies {
     // Kotlin Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
 
+    // ====== Jetpack Compose ======
+    implementation "androidx.compose.ui:ui:$compose_version"
+    // Tooling support (Previews, etc.)
+    implementation "androidx.compose.ui:ui-tooling:$compose_version"
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation "androidx.compose.foundation:foundation:$compose_version"
+    // Material Design
+    implementation "androidx.compose.material:material:$compose_version"
+    // Material design icons
+    implementation "androidx.compose.material:material-icons-core:$compose_version"
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
+    // Integration with observables
+    implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
+    // Integration with activities
+    implementation 'androidx.activity:activity-compose:1.3.0-alpha06'
+
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
@@ -74,10 +96,12 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
-    // Android  Lifecycle KTX
+    // Android Lifecycle KTX
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$androidKtx_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$androidKtx_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidKtx_version"
+    // Compose - Integration with ViewModels
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha04'
 
     // Google Material Design
     implementation 'com.google.android.material:material:1.3.0'
@@ -87,6 +111,9 @@ dependencies {
     // Hilt testing
     androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    // Jetpack Compose testing
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
 
     // Instrumented Unit Tests
     androidTestImplementation "junit:junit:4.13.2"
