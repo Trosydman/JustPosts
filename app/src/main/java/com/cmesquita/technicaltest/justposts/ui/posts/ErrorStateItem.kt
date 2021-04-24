@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.cmesquita.technicaltest.justposts.R
+import com.cmesquita.technicaltest.justposts.ui.theme.JustPostsTheme
 
 @Composable
 fun ErrorStateItem(
@@ -42,10 +43,24 @@ fun ErrorStateItem(
 
 @Preview
 @Composable
-fun DefaultErrorStateItem() {
-    ErrorStateItem(
-        onRetryClicked = {
-            // Do nothing
-        }
-    )
+fun DefaultLightErrorStateItem() {
+    JustPostsTheme {
+        ErrorStateItem(
+            onRetryClicked = {
+                // Do nothing
+            }
+        )
+    }
+}
+
+@Preview
+@Composable
+fun DefaultDarkErrorStateItem() {
+    JustPostsTheme(isDarkTheme = true) {
+        ErrorStateItem(
+            onRetryClicked = {
+                // Do nothing
+            }
+        )
+    }
 }

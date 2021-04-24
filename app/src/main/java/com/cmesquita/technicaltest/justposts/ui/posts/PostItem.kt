@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.cmesquita.technicaltest.justposts.R
 import com.cmesquita.technicaltest.justposts.ui.model.Post
 import com.cmesquita.technicaltest.justposts.ui.model.User
+import com.cmesquita.technicaltest.justposts.ui.theme.JustPostsTheme
 
 @Composable
 fun PostItem(
@@ -81,12 +82,26 @@ fun DefaultPostItem() {
         )
     )
 
-    PostItem(
-        post = michaelScottPost,
-        onItemClicked = {
-            // Do nothing
+    Column {
+        JustPostsTheme {
+            PostItem(
+                post = michaelScottPost,
+                onItemClicked = {
+                    // Do nothing
+                }
+            )
         }
-    )
+
+        JustPostsTheme(isDarkTheme = true) {
+            PostItem(
+                post = michaelScottPost,
+                onItemClicked = {
+                    // Do nothing
+                }
+            )
+        }
+    }
+
 }
 
 @Preview
@@ -103,12 +118,26 @@ fun PostItemWithoutTitle() {
             userName = "@mscott"
         )
     )
-    PostItem(
-        post = michaelScottPost,
-        onItemClicked = {
-            // Do nothing
+
+    Column {
+        JustPostsTheme {
+            PostItem(
+                post = michaelScottPost,
+                onItemClicked = {
+                    // Do nothing
+                }
+            )
         }
-    )
+
+        JustPostsTheme(isDarkTheme = true) {
+            PostItem(
+                post = michaelScottPost,
+                onItemClicked = {
+                    // Do nothing
+                }
+            )
+        }
+    }
 }
 
 @Preview
@@ -123,10 +152,24 @@ fun PostItemWithoutBody() {
             userName = "@mscott"
         )
     )
-    PostItem(
-        post = michaelScottPost,
-        onItemClicked = {
-            // Do nothing
+
+    Column {
+        JustPostsTheme {
+            PostItem(
+                post = michaelScottPost,
+                onItemClicked = {
+                    // Do nothing
+                }
+            )
         }
-    )
+
+        JustPostsTheme(isDarkTheme = true) {
+            PostItem(
+                post = michaelScottPost,
+                onItemClicked = {
+                    // Do nothing
+                }
+            )
+        }
+    }
 }

@@ -13,6 +13,9 @@ import androidx.compose.ui.unit.dp
 import com.cmesquita.technicaltest.justposts.R
 import com.cmesquita.technicaltest.justposts.ui.model.Post
 import com.cmesquita.technicaltest.justposts.ui.model.User
+import com.cmesquita.technicaltest.justposts.ui.theme.JustPostsTheme
+
+private const val PREVIEW_WIDTH = 800
 
 @Composable
 fun PostDetails(
@@ -98,7 +101,7 @@ fun PostDetails(
     }
 }
 
-@Preview
+@Preview(widthDp = PREVIEW_WIDTH)
 @Composable
 fun DefaultPostDetails() {
     val michaelScottPost = Post(
@@ -112,15 +115,33 @@ fun DefaultPostDetails() {
             userName = "@mscott"
         )
     )
-    PostDetails(
-        post = michaelScottPost,
-        onCloseButtonClicked = {
-            // Do nothing
+
+    Row {
+        Box(modifier = Modifier.fillMaxWidth(0.5f)) {
+            JustPostsTheme {
+                PostDetails(
+                    post = michaelScottPost,
+                    onCloseButtonClicked = {
+                        // Do nothing
+                    }
+                )
+            }
         }
-    )
+
+        Box {
+            JustPostsTheme(isDarkTheme = true) {
+                PostDetails(
+                    post = michaelScottPost,
+                    onCloseButtonClicked = {
+                        // Do nothing
+                    }
+                )
+            }
+        }
+    }
 }
 
-@Preview
+@Preview(widthDp = PREVIEW_WIDTH)
 @Composable
 fun PostDetailsWithoutAuthor() {
     val anonymousPost = Post(
@@ -134,15 +155,33 @@ fun PostDetailsWithoutAuthor() {
             userName = null
         )
     )
-    PostDetails(
-        post = anonymousPost,
-        onCloseButtonClicked = {
-            // Do nothing
+
+    Row {
+        Box(modifier = Modifier.fillMaxWidth(0.5f)) {
+            JustPostsTheme {
+                PostDetails(
+                    post = anonymousPost,
+                    onCloseButtonClicked = {
+                        // Do nothing
+                    }
+                )
+            }
         }
-    )
+
+        Box {
+            JustPostsTheme(isDarkTheme = true) {
+                PostDetails(
+                    post = anonymousPost,
+                    onCloseButtonClicked = {
+                        // Do nothing
+                    }
+                )
+            }
+        }
+    }
 }
 
-@Preview
+@Preview(widthDp = PREVIEW_WIDTH)
 @Composable
 fun PostDetailsWithoutAuthorUsername() {
     val michaelScottPost = Post(
@@ -156,15 +195,33 @@ fun PostDetailsWithoutAuthorUsername() {
             userName = null
         )
     )
-    PostDetails(
-        post = michaelScottPost,
-        onCloseButtonClicked = {
-            // Do nothing
+
+    Row {
+        Box(modifier = Modifier.fillMaxWidth(0.5f)) {
+            JustPostsTheme {
+                PostDetails(
+                    post = michaelScottPost,
+                    onCloseButtonClicked = {
+                        // Do nothing
+                    }
+                )
+            }
         }
-    )
+
+        Box {
+            JustPostsTheme(isDarkTheme = true) {
+                PostDetails(
+                    post = michaelScottPost,
+                    onCloseButtonClicked = {
+                        // Do nothing
+                    }
+                )
+            }
+        }
+    }
 }
 
-@Preview
+@Preview(widthDp = PREVIEW_WIDTH)
 @Composable
 fun PostDetailsWithoutAuthorName() {
     val michaelScottPost = Post(
@@ -178,10 +235,28 @@ fun PostDetailsWithoutAuthorName() {
             userName = "@mscott"
         )
     )
-    PostDetails(
-        post = michaelScottPost,
-        onCloseButtonClicked = {
-            // Do nothing
+
+    Row {
+        Box(modifier = Modifier.fillMaxWidth(0.5f)) {
+            JustPostsTheme {
+                PostDetails(
+                    post = michaelScottPost,
+                    onCloseButtonClicked = {
+                        // Do nothing
+                    }
+                )
+            }
         }
-    )
+
+        Box {
+            JustPostsTheme(isDarkTheme = true) {
+                PostDetails(
+                    post = michaelScottPost,
+                    onCloseButtonClicked = {
+                        // Do nothing
+                    }
+                )
+            }
+        }
+    }
 }
