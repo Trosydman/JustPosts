@@ -8,11 +8,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cmesquita.technicaltest.justposts.R
 import com.cmesquita.technicaltest.justposts.ui.model.Post
 import com.cmesquita.technicaltest.justposts.ui.model.User
+import com.cmesquita.technicaltest.justposts.ui.theme.JustPostsTheme
+
+private const val PREVIEW_WIDTH = 800
 
 @Composable
 fun PostDetails(
@@ -41,7 +45,9 @@ fun PostDetails(
                     text = post.title ?: stringResource(id = R.string.message_no_post_title),
                     style = MaterialTheme.typography.h4,
                     color = MaterialTheme.colors.onSurface,
-//                    enabled = post.hasTitle()
+                    maxLines = 3,
+                    overflow = TextOverflow.Ellipsis,
+                    // TODO enabled = post.hasTitle()
                 )
 
                 IconButton(
@@ -66,7 +72,7 @@ fun PostDetails(
                             ?: stringResource(id = R.string.message_anonymous_author),
                         style = MaterialTheme.typography.body2,
                         color = MaterialTheme.colors.onSurface,
-//                        enabled = post.user.isAnonymous()
+                        // TODO enabled = post.user.isAnonymous()
                     )
                 }
 
@@ -92,13 +98,13 @@ fun PostDetails(
                 },
                 style = MaterialTheme.typography.body1,
                 color = MaterialTheme.colors.onSurface,
-//                enabled = post.hasBody()
+                // TODO enabled = post.hasBody()
             )
         }
     }
 }
 
-@Preview
+@Preview(widthDp = PREVIEW_WIDTH)
 @Composable
 fun DefaultPostDetails() {
     val michaelScottPost = Post(
@@ -112,15 +118,33 @@ fun DefaultPostDetails() {
             userName = "@mscott"
         )
     )
-    PostDetails(
-        post = michaelScottPost,
-        onCloseButtonClicked = {
-            // Do nothing
+
+    Row {
+        Box(modifier = Modifier.fillMaxWidth(0.5f)) {
+            JustPostsTheme {
+                PostDetails(
+                    post = michaelScottPost,
+                    onCloseButtonClicked = {
+                        // Do nothing
+                    }
+                )
+            }
         }
-    )
+
+        Box {
+            JustPostsTheme(isDarkTheme = true) {
+                PostDetails(
+                    post = michaelScottPost,
+                    onCloseButtonClicked = {
+                        // Do nothing
+                    }
+                )
+            }
+        }
+    }
 }
 
-@Preview
+@Preview(widthDp = PREVIEW_WIDTH)
 @Composable
 fun PostDetailsWithoutAuthor() {
     val anonymousPost = Post(
@@ -134,15 +158,33 @@ fun PostDetailsWithoutAuthor() {
             userName = null
         )
     )
-    PostDetails(
-        post = anonymousPost,
-        onCloseButtonClicked = {
-            // Do nothing
+
+    Row {
+        Box(modifier = Modifier.fillMaxWidth(0.5f)) {
+            JustPostsTheme {
+                PostDetails(
+                    post = anonymousPost,
+                    onCloseButtonClicked = {
+                        // Do nothing
+                    }
+                )
+            }
         }
-    )
+
+        Box {
+            JustPostsTheme(isDarkTheme = true) {
+                PostDetails(
+                    post = anonymousPost,
+                    onCloseButtonClicked = {
+                        // Do nothing
+                    }
+                )
+            }
+        }
+    }
 }
 
-@Preview
+@Preview(widthDp = PREVIEW_WIDTH)
 @Composable
 fun PostDetailsWithoutAuthorUsername() {
     val michaelScottPost = Post(
@@ -156,15 +198,33 @@ fun PostDetailsWithoutAuthorUsername() {
             userName = null
         )
     )
-    PostDetails(
-        post = michaelScottPost,
-        onCloseButtonClicked = {
-            // Do nothing
+
+    Row {
+        Box(modifier = Modifier.fillMaxWidth(0.5f)) {
+            JustPostsTheme {
+                PostDetails(
+                    post = michaelScottPost,
+                    onCloseButtonClicked = {
+                        // Do nothing
+                    }
+                )
+            }
         }
-    )
+
+        Box {
+            JustPostsTheme(isDarkTheme = true) {
+                PostDetails(
+                    post = michaelScottPost,
+                    onCloseButtonClicked = {
+                        // Do nothing
+                    }
+                )
+            }
+        }
+    }
 }
 
-@Preview
+@Preview(widthDp = PREVIEW_WIDTH)
 @Composable
 fun PostDetailsWithoutAuthorName() {
     val michaelScottPost = Post(
@@ -178,10 +238,28 @@ fun PostDetailsWithoutAuthorName() {
             userName = "@mscott"
         )
     )
-    PostDetails(
-        post = michaelScottPost,
-        onCloseButtonClicked = {
-            // Do nothing
+
+    Row {
+        Box(modifier = Modifier.fillMaxWidth(0.5f)) {
+            JustPostsTheme {
+                PostDetails(
+                    post = michaelScottPost,
+                    onCloseButtonClicked = {
+                        // Do nothing
+                    }
+                )
+            }
         }
-    )
+
+        Box {
+            JustPostsTheme(isDarkTheme = true) {
+                PostDetails(
+                    post = michaelScottPost,
+                    onCloseButtonClicked = {
+                        // Do nothing
+                    }
+                )
+            }
+        }
+    }
 }
