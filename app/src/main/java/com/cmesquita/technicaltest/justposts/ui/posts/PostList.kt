@@ -27,9 +27,7 @@ fun PostList(
 ) {
     val lazyPostItems: LazyPagingItems<Post> = posts.collectAsLazyPagingItems()
 
-    LazyColumn(
-        modifier = Modifier.fillMaxSize()
-    ) {
+    LazyColumn {
         if (postsTest != null) {
             items(postsTest) { post ->
                 PostItem(
@@ -80,6 +78,7 @@ fun PostList(
     ) {
         val loadStateError = lazyPostItems.loadState.refresh as LoadState.Error
         val errorMessage = loadStateError.error.localizedMessage
+            ?: stringResource(R.string.message_unexpected_error)
 
         ErrorAlertDialog(
             errorMessage = errorMessage,
