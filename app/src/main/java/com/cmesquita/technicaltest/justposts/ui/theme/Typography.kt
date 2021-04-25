@@ -16,19 +16,19 @@ object Typography {
         ),
         h3 = Typography().h3.copy(
             fontFamily = FontFamily.WorkSans,
-            fontWeight = FontWeight.SemiBold,
+            fontWeight = FontWeight.Bold,
         ),
         h4 = Typography().h4.copy(
             fontFamily = FontFamily.WorkSans,
-            fontWeight = FontWeight.SemiBold,
+            fontWeight = FontWeight.Bold,
         ),
         h5 = Typography().h5.copy(
             fontFamily = FontFamily.WorkSans,
-            fontWeight = FontWeight.SemiBold,
+            fontWeight = FontWeight.Bold,
         ),
         h6 = Typography().h6.copy(
             fontFamily = FontFamily.WorkSans,
-            fontWeight = FontWeight.SemiBold,
+            fontWeight = FontWeight.Bold,
         ),
         subtitle1 = Typography().subtitle1.copy(
             fontFamily = FontFamily.WorkSans,
