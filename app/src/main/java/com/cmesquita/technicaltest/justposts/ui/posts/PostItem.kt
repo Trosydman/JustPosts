@@ -1,12 +1,14 @@
 package com.cmesquita.technicaltest.justposts.ui.posts
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.integerResource
@@ -25,11 +27,16 @@ fun PostItem(
     post: Post,
     onItemClicked: () -> Unit
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(dimensionResource(R.dimen.medium))
-            .clickable { onItemClicked() },
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null
+            ) { onItemClicked() },
     ) {
         Box(
             modifier = Modifier.padding(dimensionResource(R.dimen.x_large))
