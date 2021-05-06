@@ -1,7 +1,6 @@
 package com.cmesquita.technicaltest.justposts.ui.posts
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.filter
@@ -27,5 +26,4 @@ class PostsViewModel @Inject constructor(
             pagingData.filter { it.title != null && it.body != null }
         }
         .cachedIn(viewModelScope)
-        .asLiveData()
 }
