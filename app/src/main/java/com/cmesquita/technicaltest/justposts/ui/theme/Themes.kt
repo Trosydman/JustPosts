@@ -4,6 +4,9 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,6 +49,9 @@ fun JustPostsTheme(
 @Composable
 private fun ThemePlayground() {
     val columnGridWidth = PLAYGROUND_MAX_WIDTH / 3
+    val connectionState = remember {
+        mutableStateOf(true)
+    }
 
     val posts: Flow<PagingData<Post>> = flowOf(
         PagingData.from(MockUiModels.fakeDefaultUiPostList)
@@ -75,6 +81,10 @@ private fun ThemePlayground() {
         ) {
             PostList(
                 posts = posts,
+                connectionState = connectionState as State<Boolean?>,
+                onPostItemClicked = {
+                    // Do nothing
+                },
                 postsTest = MockUiModels.fakeDefaultUiPostList
             )
             LoadingStateItem()
