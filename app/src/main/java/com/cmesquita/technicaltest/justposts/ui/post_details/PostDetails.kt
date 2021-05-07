@@ -5,6 +5,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -35,71 +36,96 @@ fun PostDetails(
                     vertical = 24.dp
                 )
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
+            CompositionLocalProvider(
+                LocalContentColor provides MaterialTheme.colors.onSurface,
             ) {
-                Text(
+                Row(
                     modifier = Modifier
-                        .fillMaxWidth(0.8f),
-                    text = post.title ?: stringResource(id = R.string.message_no_post_title),
-                    style = MaterialTheme.typography.h4,
-                    color = MaterialTheme.colors.onSurface,
-                    maxLines = 3,
-                    overflow = TextOverflow.Ellipsis,
-                    // TODO enabled = post.hasTitle()
-                )
-
-                IconButton(
-                    onClick = onCloseButtonClicked,
-                    modifier = Modifier.fillMaxWidth()
+                        .fillMaxWidth()
                 ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_keyboard_arrow_down),
-                        contentDescription = "Close button"
-                    )
-                }
-            }
+                    val titleAlpha = if (post.hasTitle()) {
+                        ContentAlpha.high
+                    } else {
+                        ContentAlpha.disabled
+                    }
 
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 8.dp)
-            ) {
-                if (post.user.isAnonymous() || post.user.name != null) {
-                    Text(
-                        text = post.user.name
-                            ?: stringResource(id = R.string.message_anonymous_author),
-                        style = MaterialTheme.typography.body2,
-                        color = MaterialTheme.colors.onSurface,
-                        // TODO enabled = post.user.isAnonymous()
-                    )
+                    CompositionLocalProvider(
+                        LocalContentAlpha provides titleAlpha
+                    ) {
+                        Text(
+                            modifier = Modifier
+                                .fillMaxWidth(0.8f),
+                            text = post.title
+                                ?: stringResource(id = R.string.message_no_post_title),
+                            style = MaterialTheme.typography.h4,
+                            maxLines = 3,
+                            overflow = TextOverflow.Ellipsis,
+                        )
+                    }
+
+                    IconButton(
+                        onClick = onCloseButtonClicked,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_keyboard_arrow_down),
+                            contentDescription = "Close button"
+                        )
+                    }
                 }
 
-                if (!post.user.isAnonymous() && post.user.userName != null) {
-                    Text(
-                        modifier = Modifier.padding(top = 2.dp),
-                        text = post.user.userName,
-                        style = MaterialTheme.typography.caption,
-                        color = MaterialTheme.colors.onSurface,
-                    )
-                }
-            }
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp)
+                ) {
+                    if (post.user.isAnonymous() || post.user.name != null) {
+                        val authorNameAlpha =
+                            if (post.user.isAnonymous() || post.user.name != null) {
+                                ContentAlpha.high
+                            } else {
+                                ContentAlpha.disabled
+                            }
 
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 24.dp)
-                    .verticalScroll(rememberScrollState()),
-                text = if (post.hasBody()) {
-                    post.body!!
+                        CompositionLocalProvider(
+                            LocalContentAlpha provides authorNameAlpha
+                        ) {
+                            Text(
+                                text = post.user.name
+                                    ?: stringResource(id = R.string.message_anonymous_author),
+                                style = MaterialTheme.typography.body2,
+                            )
+                        }
+                    }
+
+                    if (!post.user.isAnonymous() && post.user.userName != null) {
+                        Text(
+                            modifier = Modifier.padding(top = 2.dp),
+                            text = post.user.userName,
+                            style = MaterialTheme.typography.caption,
+                        )
+                    }
+                }
+
+                val bodyAlpha = if (post.hasBody()) {
+                    ContentAlpha.high
                 } else {
-                    stringResource(id = R.string.message_no_post_body)
-                },
-                style = MaterialTheme.typography.body1,
-                color = MaterialTheme.colors.onSurface,
-                // TODO enabled = post.hasBody()
-            )
+                    ContentAlpha.disabled
+                }
+
+                CompositionLocalProvider(
+                    LocalContentAlpha provides bodyAlpha
+                ) {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 24.dp)
+                            .verticalScroll(rememberScrollState()),
+                        text = post.body ?: stringResource(id = R.string.message_no_post_body),
+                        style = MaterialTheme.typography.body1,
+                    )
+                }
+            }
         }
     }
 }
