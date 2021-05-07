@@ -3,11 +3,9 @@ package com.cmesquita.technicaltest.justposts.ui.posts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -27,6 +25,9 @@ fun PostItem(
     post: Post,
     onItemClicked: () -> Unit
 ) {
+    val titleExists = post.title != null
+    val bodyExists = post.body != null
+
     val interactionSource = remember { MutableInteractionSource() }
 
     Card(
@@ -35,7 +36,8 @@ fun PostItem(
             .padding(dimensionResource(R.dimen.medium))
             .clickable(
                 interactionSource = interactionSource,
-                indication = null
+                indication = null,
+                enabled = titleExists || bodyExists
             ) { onItemClicked() },
     ) {
         Box(
@@ -44,30 +46,57 @@ fun PostItem(
             Row {
                 Icon(
                     modifier = Modifier.size(48.dp),
-                    painter = painterResource(R.drawable.ic_twotone_sticky_note),
+                    painter = painterResource(
+                        if (titleExists || bodyExists) {
+                            R.drawable.ic_twotone_sticky_note
+                        } else {
+                            R.drawable.ic_twotone_empty_sticky_note
+                        }
+                    ),
                     contentDescription = null
                 )
 
-                Column(
-                    modifier = Modifier.padding(start = dimensionResource(R.dimen.x_large))
+                CompositionLocalProvider(
+                    LocalContentColor provides MaterialTheme.colors.onSurface,
                 ) {
-                    Text(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = post.title ?: stringResource(R.string.message_no_post_title),
-                        color = MaterialTheme.colors.onSurface,
-                        style = MaterialTheme.typography.h5,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                    Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = dimensionResource(R.dimen.large)),
-                        text = post.body?.take(integerResource(R.integer.max_post_body_character))
-                            ?: stringResource(R.string.message_no_post_body),
-                        color = MaterialTheme.colors.onSurface,
-                        style = MaterialTheme.typography.body2
-                    )
+                    Column(
+                        modifier = Modifier.padding(start = dimensionResource(R.dimen.x_large))
+                    ) {
+                        val titleContentAlpha = if (titleExists) {
+                            ContentAlpha.high
+                        } else {
+                            ContentAlpha.disabled
+                        }
+                        val bodyContentAlpha = if (bodyExists) {
+                            ContentAlpha.high
+                        } else {
+                            ContentAlpha.disabled
+                        }
+
+                        CompositionLocalProvider(
+                            LocalContentAlpha provides titleContentAlpha
+                        ) {
+                            Text(
+                                modifier = Modifier.fillMaxWidth(),
+                                text = post.title ?: stringResource(R.string.message_no_post_title),
+                                style = MaterialTheme.typography.h5,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
+                        CompositionLocalProvider(
+                            LocalContentAlpha provides bodyContentAlpha
+                        ) {
+                            Text(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = dimensionResource(R.dimen.large)),
+                                text = post.body?.take(integerResource(R.integer.max_post_body_character))
+                                    ?: stringResource(R.string.message_no_post_body),
+                                style = MaterialTheme.typography.body2
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -153,6 +182,40 @@ fun PostItemWithoutBody() {
     val michaelScottPost = Post(
         id = null,
         title = "Title of a super super super super large Post",
+        body = null,
+        user = User(
+            name = "Michael Scott",
+            userName = "@mscott"
+        )
+    )
+
+    Column {
+        JustPostsTheme {
+            PostItem(
+                post = michaelScottPost,
+                onItemClicked = {
+                    // Do nothing
+                }
+            )
+        }
+
+        JustPostsTheme(isDarkTheme = true) {
+            PostItem(
+                post = michaelScottPost,
+                onItemClicked = {
+                    // Do nothing
+                }
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+fun PostItemWithoutContent() {
+    val michaelScottPost = Post(
+        id = null,
+        title = null,
         body = null,
         user = User(
             name = "Michael Scott",
